@@ -1,0 +1,13 @@
+This file is created by me. The goal is to give explanation about all main 
+dependencies used in the projet. 
+
+@author OUSSA Donatien.
+
+
+Neon postgres : https://console.neon.tech 
+This tool is used to create a postres database in the cloud 
+
+Drizzle ORM: https://orm.drizzle.team
+Drizzle is used as ORM to manage the database 
+
+Auth.js 
