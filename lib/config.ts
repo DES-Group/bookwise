@@ -18,7 +18,12 @@ const config = {
             qstashCurrentSigningKey: process.env.QSTASH_CURRENT_SIGNING_KEY!, 
             qstashNextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!
         }, 
-        resendToken: process.env.RESEND_TOKEN!
+        resendToken: process.env.RESEND_TOKEN!, 
+        emailjs: {
+            serviceId: process.env.EMAILJS_SERVICE_ID!, 
+            templateId: process.env.EMAILJS_TEMPLATE_ID!,  
+            publicKey: process.env.EMAILJS_USER_PUBLIC_KEY!
+        }
     }
 }
 
