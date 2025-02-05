@@ -77,7 +77,7 @@ export const signUp = async (params: AuthCredentials) => {
             url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
             body: {
                 email, 
-                fullName
+                fullName,
             }
         })      
 

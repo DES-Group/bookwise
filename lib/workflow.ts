@@ -1,5 +1,6 @@
 //Client for workflow 
-import {Client as WorkflowClient} from "@upstash/workflow"
+import { Client as WorkflowClient } from "@upstash/workflow"
+import { Client as QStashClient, resend } from "@upstash/qstash";
 import config from "./config";
 import emailjs from '@emailjs/browser';
 import { toast } from "@/hooks/use-toast";
@@ -10,24 +11,34 @@ export const workflowClient = new WorkflowClient({
     token: config.env.upstash.qstashToken
 }); 
 
+export const qstashClient = new QStashClient({
+    token: config.env.upstash.qstashToken
+})
+
 
 // This function use resend to send e-mails
-export const sendEmail =async ({email, subject, message }:{email:string, subject:string, message: string}) => {
-    const { status, body } = await context.api.resend.call(
-        "Call Resend",
-        {
-            token: config.env.resendToken,
-            body: {
-                from: "Bookwise <onboarding@resend.dev>",
-                to: [email],
-                subject: subject,
-                html: message,
-            },
-            headers: {
-                "content-type": "application/json",
-            },
+export const sendEmail = async ({
+    email,
+    subject,
+    message
+}: {
+        email: string,
+        subject: string,
+        message: string
+}) => {
+    
+    await qstashClient.publishJSON({
+        api: {
+            name: "email", 
+            provider: resend({token: config.env.resendToken})
+        }, 
+        body: {
+            from: "donatienoussaodb@gmail.com", 
+            to: [email], 
+            subject, 
+            html: message
         }
-    );
+    });
 }
 
 
@@ -39,22 +50,21 @@ export const sendEmailWithEmailJS = async ({email, subject, message}:{email:stri
         const publicKey = config.env.emailjs.publicKey;
 
 
-        const emailParams = {
-            subject, 
-            email, 
-            message
-        }
+        const formData = {
+            to_name: email,
+            from_name: 'Bookwise Team',
+            message,
+            reply_to: 'contact@bookwise.com'
+        };
 
-        const result = await emailjs.send(serviceId, templateId, emailParams, publicKey);
+        const result = await emailjs.send(serviceId, templateId, formData, publicKey);
 
         if (result.status === 200) {
-            return toast({
-                title: "Success",
-                description: "Email sent"
-            })
+            return { success: true };
         }
         
     } catch (error) {
-        
+        console.log(error);                           
+        return {success: false, error: error}
     }
 }
