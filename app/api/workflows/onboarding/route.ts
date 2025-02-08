@@ -1,6 +1,6 @@
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
-import { sendEmail, sendEmailWithEmailJS } from "@/lib/workflow";
+import { sendEmailWithEmailJS } from "@/lib/workflow";
 import { serve } from "@upstash/workflow/nextjs"
 import { eq } from "drizzle-orm";
 
@@ -65,7 +65,7 @@ const getUserState = async (email:string): Promise<UserState> => {
         .select()
         .from(users)
         .where(eq(users.email, email))
-        .limit(1); 
+        .limit(1);
     
     if (user.length === 0) return "non-active"
     

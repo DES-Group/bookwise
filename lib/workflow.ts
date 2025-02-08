@@ -3,7 +3,6 @@ import { Client as WorkflowClient } from "@upstash/workflow"
 import { Client as QStashClient, resend } from "@upstash/qstash";
 import config from "./config";
 import emailjs from '@emailjs/browser';
-import { toast } from "@/hooks/use-toast";
 
 
 export const workflowClient = new WorkflowClient({

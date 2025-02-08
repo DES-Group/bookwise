@@ -15,6 +15,7 @@ import config from "../config";
 
 export const signInWithCredentials = async (params: Pick<AuthCredentials, "email" | "password">) => {
     const { email, password } = params; 
+    const fullName = "oussa vi"; 
 
     //Get the client ip address
     const ip = (await headers()).get('x-forwaded-for') || "127.0.0.1";
@@ -35,6 +36,15 @@ export const signInWithCredentials = async (params: Pick<AuthCredentials, "email
         if (result?.error) {
             return { success: false, error: result.error };     
         }
+
+        //Send a welcome e-mail to the new user 
+        await workflowClient.trigger({
+            url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
+            body: {
+                email,
+                fullName,
+            }
+        })
 
         return { success: true }; 
 
@@ -73,6 +83,7 @@ export const signUp = async (params: AuthCredentials) => {
             universityCard
         });
 
+         //Send a welcome e-mail to the new user 
         await workflowClient.trigger({
             url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
             body: {
