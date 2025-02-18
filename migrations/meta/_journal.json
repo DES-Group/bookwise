@@ -8,6 +8,20 @@
       "when": 1737803002164,
       "tag": "0000_late_psylocke",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1739803014149,
+      "tag": "0001_fixed_silver_centurion",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739824847170,
+      "tag": "0002_misty_blue_blade",
+      "breakpoints": true
     }
   ]
 }

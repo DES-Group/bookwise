@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Session } from 'next-auth';
 import { getInitials } from '@/lib/utils';
+import { signOut } from 'next-auth/react';
 
 
 const Header = ({session}:{session: Session}) => {
@@ -35,6 +36,14 @@ const Header = ({session}:{session: Session}) => {
                             </AvatarFallback>
                         </Avatar>
                     </Link>
+{/* 
+                    <form action={async () => {
+                        'use server'
+
+                        await signOut()
+                    }}>
+                        <Button>Logout</Button>
+                    </form> */}
                 </li>
             </ul>
         </header>

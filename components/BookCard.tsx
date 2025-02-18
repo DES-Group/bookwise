@@ -9,15 +9,15 @@ import {Button} from "@/components/ui/button";
 const BookCard = ({
     id,
     title,
-    color,
+    coverColor,
     genre,
-    cover,
-    isLoanedBook = false
+    coverUrl, 
+    isLoanedBook = false,
 }: Book) => {
     return (
         <li className={`${isLoanedBook && 'xs:w-52 w-full'}`}>
-            <Link href={`/book/${id}`} className={`${isLoanedBook && 'w-full flex flex-col items-center'}`}>
-                <BookCover coverColor={color} coverImage={cover} />
+            <Link href={`/books/${id}`} className={`${isLoanedBook && 'w-full flex flex-col items-center'}`}>
+                <BookCover coverColor={coverColor} coverImage={coverUrl} />
 
                 <div className={`mt-4 ${!isLoanedBook && "xs:max-w-40 max-w-28"}`}>
                     <p className={"book-title"}>{title}</p>

@@ -1,19 +1,19 @@
 /** This file contain the of propos using in components */
 
 export type Book = {
-    id: number,
+    id: string,
     title: string,
     author: string,
     genre: string,
     rating: number,
-    total_copies: number,
-    available_copies: number,
+    totalCopies: number,
+    availableCopies: number,
     description: string,
-    color: string,
-    cover: string,
-    video: string,
+    coverColor: string,
+    coverUrl: string,
+    videoUrl: string,
     summary: string,
-    isLoanedBook?: boolean
+    createdAt: Date | null,
 }
 
 export type AuthCredentials = {
@@ -22,4 +22,23 @@ export type AuthCredentials = {
     password: string; 
     universityId: number;
     universityCard: string;
+}
+
+
+export type BookParams = {
+    title: string,
+    description: string,
+    author: string,
+    genre: string,
+    rating: number,
+    totalCopies: number,
+    coverUrl: string,
+    coverColor: string,
+    videoUrl: string,
+    summary: string
+}
+
+export type BorrowBookParams = {
+    bookId: string,
+    userId: string,
 }
